@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/raylin/Documents/GitHub/Template-5.5/src/main'
+relocations:     []
+...
