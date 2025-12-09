@@ -2,12 +2,14 @@
 #include <string>
 
 int main(){
-    std::string name_of_png="spiritualrowdy.png";
+    std::string name_of_png="spiritualrowdy";
+
+    
     std::string path = "/Users/raylin/Documents/GitHub/sandboxGame/assets/sprites/";
-    auto file = path + name_of_png;
+    auto file = path + name_of_png + ".png";
     Image img = LoadImage(file.c_str());
     path = "header_files/";
-    file = path + name_of_png;
+    file = path + name_of_png + ".h";
     ExportImageAsCode(img, file.c_str());
     UnloadImage(img);
 

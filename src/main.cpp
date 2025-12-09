@@ -1,6 +1,6 @@
 #include "raylib.h"
 #include "raymath.h"
-#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/slime_purple.h"
+#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/spiritualrowdy.h"
 #include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/evilMonster.h"
 
 #include <iostream>
@@ -18,14 +18,14 @@ int main(void)
 
     //configrations embeded images
     //--------------------------------------------------------------------------------------
-    Image slime_purple;
-    slime_purple.format = SLIME_PURPLE_FORMAT;
-    slime_purple.height = SLIME_PURPLE_HEIGHT;
-    slime_purple.width = SLIME_PURPLE_WIDTH;
-    slime_purple.data = SLIME_PURPLE_DATA;
-    slime_purple.mipmaps = 1;
+    Image spiritual_rowdy;
+    spiritual_rowdy.format = SPIRITUALROWDY_FORMAT;
+    spiritual_rowdy.height = SPIRITUALROWDY_HEIGHT;
+    spiritual_rowdy.width = SPIRITUALROWDY_WIDTH;
+    spiritual_rowdy.data = SPIRITUALROWDY_DATA;
+    spiritual_rowdy.mipmaps = 1;
 
-    Texture2D sprite_slime_purple = LoadTextureFromImage(slime_purple);
+    Texture2D sprite_spiritual_rowdy = LoadTextureFromImage(spiritual_rowdy);
 
     Image evil_Monster;
     evil_Monster.format = EVILMONSTER_FORMAT;
@@ -40,9 +40,9 @@ Vector2 evilPos;
 evilPos.x = (float)screenWidth / 2 - (float)sprite_evil_Monster.width / 2;
 evilPos.y = (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2;
 
-Vector2 slime_purple_pos; 
-slime_purple_pos.y=(float)50.0;
-slime_purple_pos.x=(float)50.0;
+Vector2 spiritual_rowdy_pos; 
+spiritual_rowdy_pos.y=(float)50.0;
+spiritual_rowdy_pos.x=(float)50.0;
 
     //--------------------------------------------------------------------------------------
 
@@ -66,10 +66,10 @@ slime_purple_pos.x=(float)50.0;
 
             ClearBackground(RAYWHITE);
 
-            //DrawTexture(sprite_slime_purple, screenWidth/2 - sprite_slime_purple.width/2, screenHeight/2 - sprite_slime_purple.height/2, BLACK);
+            //DrawTexture(sprite_spiritual_rowdy, screenWidth/2 - sprite_spiritual_rowdy.width/2, screenHeight/2 - sprite_spiritual_rowdy.height/2, BLACK);
             //DrawTexture(sprite_evil_Monster, screenWidth/2 - sprite_evil_Monster.width/2, screenHeight/2 - sprite_evil_Monster.height/2,WHITE);
             DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
-            DrawTexture(sprite_slime_purple, slime_purple_pos.x, slime_purple_pos.y, WHITE);
+            DrawTexture(sprite_spiritual_rowdy, spiritual_rowdy_pos.x, spiritual_rowdy_pos.y, WHITE);
             //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
 
         EndDrawing();
