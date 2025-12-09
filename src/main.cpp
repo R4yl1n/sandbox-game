@@ -45,19 +45,37 @@ spiritual_rowdy_pos.y=(float)50.0;
 spiritual_rowdy_pos.x=(float)50.0;
 
     //--------------------------------------------------------------------------------------
+    float rotation = 0.0f;
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // Update
         //----------------------------------------------------------------------------------
+        
+
+
         float speed = 2.0f;
 
+        Vector2 forward = {
+        cosf(rotation * DEG2RAD),
+        sinf(rotation * DEG2RAD)
+};
 
-        if (IsKeyDown(KEY_RIGHT)) evilPos.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) evilPos.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) evilPos.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) evilPos.y += 2.0f;
+        //if (IsKeyDown(KEY_RIGHT)) evilPos.x += 2.0f;
+        //if (IsKeyDown(KEY_LEFT)) evilPos.x -= 2.0f;
+        //if (IsKeyDown(KEY_UP)) evilPos.y -= 2.0f;
+        if (IsKeyDown(KEY_UP)) {
+        evilPos.x += forward.x * speed;
+        evilPos.y += forward.y * speed;
+        }
+        //if (IsKeyDown(KEY_DOWN)) evilPos.y += 2.0f;
+        if (IsKeyDown(KEY_DOWN)) {
+        evilPos.x -= forward.x * speed;
+        evilPos.y -= forward.y * speed;
+        }
+        if (IsKeyDown(KEY_RIGHT)) rotation += 2.0f;
+        if (IsKeyDown(KEY_LEFT))  rotation -= 2.0f;
+        
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -70,7 +88,16 @@ spiritual_rowdy_pos.x=(float)50.0;
             //DrawTexture(sprite_evil_Monster, screenWidth/2 - sprite_evil_Monster.width/2, screenHeight/2 - sprite_evil_Monster.height/2,WHITE);
             //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
             DrawTexture(sprite_spiritual_rowdy, spiritual_rowdy_pos.x, spiritual_rowdy_pos.y, WHITE);
-            DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
+            
+            //DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
+            DrawTexturePro(
+            sprite_evil_Monster,
+            Rectangle{0, 0, (float)sprite_evil_Monster.width, (float)sprite_evil_Monster.height},
+            Rectangle{evilPos.x, evilPos.y, (float)sprite_evil_Monster.width, (float)sprite_evil_Monster.height},
+            Vector2{(float)sprite_evil_Monster.width/2, (float)sprite_evil_Monster.height/2}, 
+            rotation,
+            WHITE
+        );
 
         EndDrawing();
         //----------------------------------------------------------------------------------
