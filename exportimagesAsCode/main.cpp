@@ -1,9 +1,14 @@
 #include "raylib.h"
+#include <string>
 
 int main(){
-    auto file = "/Users/raylin/Documents/GitHub/sandboxGame/assets/sprites/Pixel.png";
-    Image img = LoadImage(file);
-    ExportImageAsCode(img, "header_files/evilMonster.h");
+    std::string name_of_png="spiritualrowdy.png";
+    std::string path = "/Users/raylin/Documents/GitHub/sandboxGame/assets/sprites/";
+    auto file = path + name_of_png;
+    Image img = LoadImage(file.c_str());
+    path = "header_files/";
+    file = path + name_of_png;
+    ExportImageAsCode(img, file.c_str());
     UnloadImage(img);
 
 

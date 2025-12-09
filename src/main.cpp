@@ -40,6 +40,10 @@ Vector2 evilPos;
 evilPos.x = (float)screenWidth / 2 - (float)sprite_evil_Monster.width / 2;
 evilPos.y = (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2;
 
+Vector2 slime_purple_pos; 
+slime_purple_pos.y=(float)50.0;
+slime_purple_pos.x=(float)50.0;
+
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -65,6 +69,7 @@ evilPos.y = (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2;
             //DrawTexture(sprite_slime_purple, screenWidth/2 - sprite_slime_purple.width/2, screenHeight/2 - sprite_slime_purple.height/2, BLACK);
             //DrawTexture(sprite_evil_Monster, screenWidth/2 - sprite_evil_Monster.width/2, screenHeight/2 - sprite_evil_Monster.height/2,WHITE);
             DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
+            DrawTexture(sprite_slime_purple, slime_purple_pos.x, slime_purple_pos.y, WHITE);
             //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
 
         EndDrawing();
