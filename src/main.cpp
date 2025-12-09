@@ -13,8 +13,6 @@ struct Bullet {
 
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
 
@@ -26,9 +24,11 @@ int main(void)
     
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     
+    //--------------------------------------------------------------------------------------
     //configrations embeded images
     //--------------------------------------------------------------------------------------
     
+    //----------------------------Creating spiritual rowdy----------------------------
     Image spiritual_rowdy;
     spiritual_rowdy.format = SPIRITUALROWDY_FORMAT;
     spiritual_rowdy.height = SPIRITUALROWDY_HEIGHT;
@@ -38,6 +38,22 @@ int main(void)
     
     Texture2D sprite_spiritual_rowdy = LoadTextureFromImage(spiritual_rowdy);
     
+    //Vector2 spiritual_rowdy_pos;        
+    //spiritual_rowdy_pos.y=(float)50.0;
+    //spiritual_rowdy_pos.x=(float)50.0;
+    
+    Vector2 spiritual_rowdy_pos = {
+        (float)50.0,    //defining position X
+        (float)50.0     //defining position Y
+    };
+    Rectangle rowdyRect{
+        spiritual_rowdy_pos.x,
+        spiritual_rowdy_pos.y,
+        (float)sprite_spiritual_rowdy.width,
+        (float)sprite_spiritual_rowdy.height
+    };
+    //--------------------------------------------------------
+    //----------------------------Creating Evil Monster(Player)----------------------------
     Image evil_Monster;
     evil_Monster.format = EVILMONSTER_FORMAT;
     evil_Monster.height = EVILMONSTER_HEIGHT;
@@ -47,20 +63,14 @@ int main(void)
     
     Texture2D sprite_evil_Monster = LoadTextureFromImage(evil_Monster);
     
-    Vector2 evilPos;
-    evilPos.x = (float)screenWidth / 2 - (float)sprite_evil_Monster.width / 2;
-    evilPos.y = (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2;
-    
-    Vector2 spiritual_rowdy_pos; 
-    spiritual_rowdy_pos.y=(float)50.0;
-    spiritual_rowdy_pos.x=(float)50.0;
-    
-    Rectangle rowdyRect{
-    spiritual_rowdy_pos.x,
-    spiritual_rowdy_pos.y,
-    (float)sprite_spiritual_rowdy.width,
-    (float)sprite_spiritual_rowdy.height
-};
+    //Vector2 evilPos;
+    //evilPos.x = (float)screenWidth / 2 - (float)sprite_evil_Monster.width / 2;
+    //evilPos.y = (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2;
+
+    Vector2 evilPos = {
+        (float)screenWidth / 2 - (float)sprite_evil_Monster.width / 2, //defining position X
+        (float)screenHeight / 2 - (float)sprite_evil_Monster.height / 2 //defining position Y
+    };
 
     Rectangle evilRect{
     evilPos.x - sprite_evil_Monster.width / 2.0f,
@@ -69,26 +79,31 @@ int main(void)
     (float)sprite_evil_Monster.height
 };
     //--------------------------------------------------------------------------------------
+
+    //----------------------------Game Settings----------------------------
     float rotation = 0.0f;
     float speed = 2.0f;
     float bulletSpeed = 5.0f;
     float bulletRadius = 5.0f;
 
+    //--------------------------------------------------------
+    
+    
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         //----------------------------------------------------------------------------------
         
         Vector2 forward = {
-        cosf(rotation * DEG2RAD),
-        sinf(rotation * DEG2RAD)
+        cosf(rotation * DEG2RAD), //defining position X
+        sinf(rotation * DEG2RAD)  //defining position Y
 };
 /*
            y (sin)
             ↑
             |
             |
- (-cos) ←---o---→ (cos)
+ (-cos) ←---o---→ (cos)             Sin Cos explination
             |
             |
             ↓ (-sin)
@@ -97,11 +112,12 @@ int main(void)
         //if (IsKeyDown(KEY_RIGHT)) evilPos.x += 2.0f;
         //if (IsKeyDown(KEY_LEFT)) evilPos.x -= 2.0f;
         //if (IsKeyDown(KEY_UP)) evilPos.y -= 2.0f;
+        //if (IsKeyDown(KEY_DOWN)) evilPos.y += 2.0f;
+        
         if (IsKeyDown(KEY_UP)) {
         evilPos.x += forward.x * speed;
         evilPos.y += forward.y * speed;
         }
-        //if (IsKeyDown(KEY_DOWN)) evilPos.y += 2.0f;
         if (IsKeyDown(KEY_DOWN)) {
         evilPos.x -= forward.x * speed;
         evilPos.y -= forward.y * speed;
@@ -109,7 +125,8 @@ int main(void)
         if (IsKeyDown(KEY_RIGHT)) rotation += 2.0f;
         if (IsKeyDown(KEY_LEFT))  rotation -= 2.0f;
 
-        if (IsKeyPressed(KEY_SPACE)) {
+        //------------------------------------------Shooting bullets using space button--------------------------------------------
+        if (IsKeyPressed(KEY_SPACE)) { 
             // Freien Bullet-Slot suchen
             for (int i = 0; i < MAX_BULLETS; i++) {
                 if (!bullets[i].active) {
@@ -164,6 +181,7 @@ int main(void)
             DrawTexture(sprite_spiritual_rowdy, spiritual_rowdy_pos.x, spiritual_rowdy_pos.y, WHITE);
             
             //DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
+            //----------------------------------------Creating Evli Monster(Player)----------------------------------------------
             DrawTexturePro(
             sprite_evil_Monster,
             Rectangle{0, 0, (float)sprite_evil_Monster.width, (float)sprite_evil_Monster.height},
@@ -172,6 +190,7 @@ int main(void)
             rotation,
             WHITE
         );
+            //--------------------------------------------------------------------------------------------------------------------
         for (int i = 0; i < MAX_BULLETS; i++) {
                 if (!bullets[i].active) continue;
 
