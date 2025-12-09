@@ -60,6 +60,16 @@ spiritual_rowdy_pos.x=(float)50.0;
         cosf(rotation * DEG2RAD),
         sinf(rotation * DEG2RAD)
 };
+/*
+           y (sin)
+            ↑
+            |
+            |
+ (-cos) ←---o---→ (cos)
+            |
+            |
+            ↓ (-sin)
+*/
 
         //if (IsKeyDown(KEY_RIGHT)) evilPos.x += 2.0f;
         //if (IsKeyDown(KEY_LEFT)) evilPos.x -= 2.0f;
