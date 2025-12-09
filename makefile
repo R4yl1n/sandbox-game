@@ -5,9 +5,9 @@ OSX_OUT = -o "bin/build_osx"
 BUILD_IMAGE_OSX_OUT = -o "bin/build_img_osx"
 CFILES = src/*.cpp
 CFILESEXPORTASCODE = exportimagesAsCode/*.cpp
-build_osx:
+game:
 	$(COMPILER) $(CFILES) $(SOURCE_LIBS) $(OSX_OUT) $(OSX_OPT) 
 
-build_img:
+img:
 	$(COMPILER) $(CFILESEXPORTASCODE) $(SOURCE_LIBS) $(BUILD_IMAGE_OSX_OUT) $(OSX_OPT)
 	

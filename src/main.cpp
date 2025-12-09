@@ -68,9 +68,9 @@ spiritual_rowdy_pos.x=(float)50.0;
 
             //DrawTexture(sprite_spiritual_rowdy, screenWidth/2 - sprite_spiritual_rowdy.width/2, screenHeight/2 - sprite_spiritual_rowdy.height/2, BLACK);
             //DrawTexture(sprite_evil_Monster, screenWidth/2 - sprite_evil_Monster.width/2, screenHeight/2 - sprite_evil_Monster.height/2,WHITE);
-            DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
-            DrawTexture(sprite_spiritual_rowdy, spiritual_rowdy_pos.x, spiritual_rowdy_pos.y, WHITE);
             //DrawText("this IS a texture loaded from an image!", 300, 370, 10, GRAY);
+            DrawTexture(sprite_spiritual_rowdy, spiritual_rowdy_pos.x, spiritual_rowdy_pos.y, WHITE);
+            DrawTexture(sprite_evil_Monster, evilPos.x, evilPos.y, WHITE);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
