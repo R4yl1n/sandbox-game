@@ -1,10 +1,9 @@
 #include "raylib.h"
 #include "raymath.h"
-//#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/spiritualrowdy.h"
-//#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/evilMonster.h"
 #include "Spiritual_rowdy.hpp"
 #include "Player_Character.hpp"
 #include "Bullet.hpp"
+#include "ScreenDimensions.hpp"
 
 #include <iostream>
 
