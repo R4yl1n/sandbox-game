@@ -1,7 +1,10 @@
 #include "raylib.h"
 #include "raymath.h"
-#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/spiritualrowdy.h"
-#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/evilMonster.h"
+//#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/spiritualrowdy.h"
+//#include "/Users/raylin/Documents/GitHub/sandboxGame/header_files/evilMonster.h"
+#include "Spiritual_rowdy.hpp"
+#include "Player_Character.hpp"
+#include "Bullet.hpp"
 
 #include <iostream>
 
@@ -16,93 +19,11 @@ float bulletRadius = 5.0f;
 const int MAX_BULLETS = 50;
 
 //--------------------------------------------------------
-
-struct Bullet {
-    Vector2 pos;
-    Vector2 vel;
-    bool active;
-};
-
-class Spiritual_rowdy{
-    
-    public:
-    Spiritual_rowdy(int format, int height,int width,void* data){ //initiation of spiritual_rowdy
-        img.format = format;
-        img.height = height;
-        img.width = width;
-        img.data = data;
-        img.mipmaps = 1;
-        
-        sprite = LoadTextureFromImage(img); //in the ctor because ctor initialises as last
-        pos= {
-            (float)50.0,    //defining position X
-            (float)50.0     //defining position Y
-        };
-        rectangle={pos.x,pos.y,(float)sprite.width,(float)sprite.height};
-
-    };
-    void draw(){DrawTexture(sprite, pos.x, pos.y, WHITE);}
-    
-    Texture2D getsprite(){return sprite;}
-    Vector2 getpos(){return pos;}
-    Rectangle getrectangle(){return rectangle;}
-    
-    private:
-    Image img;
-    Texture2D sprite;
-    Rectangle rectangle{};
-    Vector2 pos{};
-    
-};
-
-class Player_Character{
-    
-    public:
-    Player_Character(int format, int height,int width,void* data){ //initiation of main character
-        img.format = format;
-        img.height = height;
-        img.width = width;
-        img.data = data;
-        img.mipmaps = 1;
-        
-        sprite = LoadTextureFromImage(img); //in the ctor because ctor initialises as last
-        pos={
-            (float)screenWidth / 2 - (float)sprite.width / 2, //defining position X
-            (float)screenHeight / 2 - (float)sprite.height / 2 //defining position Y
-        };
-        rectangle={
-            pos.x - sprite.width / 2.0f,
-            pos.y - sprite.height / 2.0f,
-            (float)sprite.width,
-            (float)sprite.height};
-        };
-
-    void draw(){
-            DrawTexturePro(
-            sprite,
-            Rectangle{0, 0, (float)sprite.width, (float)sprite.height},
-            Rectangle{pos.x, pos.y, (float)sprite.width, (float)sprite.height},
-            Vector2{(float)sprite.width/2, (float)sprite.height/2}, 
-            rotation,
-            WHITE
-        );
-    }
-    
-    Texture2D getsprite(){return sprite;}
-    Vector2 getpos(){return pos;}
-    void setposX(float value){pos.x = value;}
-    void setposY(float value){pos.y = value;}
-
-    Rectangle getrectangle(){return rectangle;}
-    
-    private:
-    Image img;
-    Texture2D sprite;
-    Rectangle rectangle{};
-    Vector2 pos{};
-    
-};
-
+ScreenDimensions screendimensions(
+    screenWidth,
+    screenHeight
+);
+ 
 int main(void){
 
     Bullet bullets[MAX_BULLETS] = {0};                                  //max available bullets
@@ -115,7 +36,7 @@ int main(void){
     //----------------------------Creating character----------------------------
 
     Spiritual_rowdy spiritual_rowdy = Spiritual_rowdy(SPIRITUALROWDY_FORMAT,SPIRITUALROWDY_HEIGHT,SPIRITUALROWDY_WIDTH,SPIRITUALROWDY_DATA);
-    Player_Character player_character = Player_Character(EVILMONSTER_FORMAT,EVILMONSTER_HEIGHT,EVILMONSTER_WIDTH,EVILMONSTER_DATA);
+    Player_Character player_character = Player_Character(EVILMONSTER_FORMAT,EVILMONSTER_HEIGHT,EVILMONSTER_WIDTH,EVILMONSTER_DATA,rotation,screendimensions);
 
     //---------------------------------------------------------------------------------
     
@@ -126,8 +47,8 @@ int main(void){
         //-------------------------------------Creating forward rule walking where looking---------------------------------------------
         
         Vector2 forward = {
-            cosf(rotation * DEG2RAD), //defining position X
-            sinf(rotation * DEG2RAD)  //defining position Y
+            cosf(player_character.getrotation() * DEG2RAD), //defining position X
+            sinf(player_character.getrotation() * DEG2RAD)  //defining position Y
         };
 /*
            y (sin)
@@ -151,8 +72,8 @@ int main(void){
             player_character.setposX(player_character.getpos().x - forward.x * speed);
             player_character.setposY(player_character.getpos().y - forward.y * speed);
         }
-        if (IsKeyDown(KEY_RIGHT)) rotation += 2.0f;
-        if (IsKeyDown(KEY_LEFT))  rotation -= 2.0f;
+        if (IsKeyDown(KEY_RIGHT)) player_character.setrotation(player_character.getrotation() + 2.0f);
+        if (IsKeyDown(KEY_LEFT))  player_character.setrotation(player_character.getrotation() - 2.0f);
 
         //-------------------------------------------------------------------------------------------
 
