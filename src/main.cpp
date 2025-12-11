@@ -34,8 +34,18 @@ int main(void){
     
     //----------------------------Creating character----------------------------
 
-    Spiritual_rowdy spiritual_rowdy = Spiritual_rowdy(SPIRITUALROWDY_FORMAT,SPIRITUALROWDY_HEIGHT,SPIRITUALROWDY_WIDTH,SPIRITUALROWDY_DATA);
     Player_Character player_character = Player_Character(EVILMONSTER_FORMAT,EVILMONSTER_HEIGHT,EVILMONSTER_WIDTH,EVILMONSTER_DATA,rotation,screendimensions);
+    std::vector<Spiritual_rowdy> rowdys;
+    rowdys.reserve(10);
+
+    for (int i = 0; i < 10; i++) {
+    rowdys.emplace_back(
+        SPIRITUALROWDY_FORMAT,
+        SPIRITUALROWDY_HEIGHT,
+        SPIRITUALROWDY_WIDTH,
+        SPIRITUALROWDY_DATA
+    );
+}
 
     //---------------------------------------------------------------------------------
     
@@ -114,12 +124,18 @@ int main(void){
         //--------------------Collision points---------------------
         for (auto &b : bullets) {
             if (!b.active) continue;
-                if (CheckCollisionCircleRec(b.pos, bulletRadius, spiritual_rowdy.getrectangle())) {
-                    b.active = false;
-                    //here muss ich denn actions
-                    std::cout << "HIT!" << std::endl;
+        
+            for (auto &enemy : rowdys) {
+                if (CheckCollisionCircleRec(b.pos, bulletRadius, enemy.getrectangle())) {
+                    if (enemy.isalive()){    
+                        b.active = false;
+                        enemy.kill();
+                        std::cout << "HIT!" << std::endl;
+                        break;
+                    }
                 }
             }
+        }
         
         //----------------------------------------------------------------------------------
 
@@ -129,13 +145,15 @@ int main(void){
 
             //----------------------------Setting Background-------------------------------
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(DARKGREEN);
 
             //-----------------------------------------------------------------------------
 
             //----------------------------Drawing characters---------------------------------
 
-            spiritual_rowdy.draw();
+            for (auto& item : rowdys){
+                item.draw();
+            }
             player_character.draw();
 
             //--------------------------------------------------------------------------------

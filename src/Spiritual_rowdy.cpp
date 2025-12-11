@@ -7,11 +7,14 @@ Spiritual_rowdy::Spiritual_rowdy(int format, int height,int width,void* data){
     img.data = data;
     img.mipmaps = 1;
     
-    sprite = LoadTextureFromImage(img); //in the ctor because ctor initialises as last
+    int x = Randomgen::getRandomInt(0,850);
+    int y = Randomgen::getRandomInt(0,450);
     pos= {
-        (float)50.0,    //defining position X
-        (float)50.0     //defining position Y
+        (float)x,    //defining position X
+        (float)y     //defining position Y
     };
+    
+    sprite = LoadTextureFromImage(img); //in the ctor because ctor initialises as last
     rectangle={pos.x,pos.y,(float)sprite.width,(float)sprite.height};
 
 };
