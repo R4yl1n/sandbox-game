@@ -2,7 +2,7 @@
 #include <string>
 
 int main(){
-    std::string name_of_png="spiritualrowdy";
+    std::string name_of_png="backgroundImage";
 
     
     std::string path = "/Users/raylin/Documents/GitHub/sandboxGame/assets/sprites/";

@@ -4,6 +4,8 @@
 #include "Player_Character.hpp"
 #include "Bullet.hpp"
 #include "ScreenDimensions.hpp"
+#include "Background.hpp"
+
 
 #include <iostream>
 
@@ -16,6 +18,7 @@ float speed = 2.0f;
 float bulletSpeed = 5.0f;
 float bulletRadius = 5.0f;
 const int MAX_BULLETS = 50;
+int points = 0;
 
 //--------------------------------------------------------
 ScreenDimensions screendimensions(
@@ -48,7 +51,9 @@ int main(void){
 }
 
     //---------------------------------------------------------------------------------
-    
+    //-----------------------------Creating Background----------------------------
+    Background background_image = Background(BACKGROUNDIMAGE_FORMAT,BACKGROUNDIMAGE_HEIGHT,BACKGROUNDIMAGE_WIDTH,BACKGROUNDIMAGE_DATA);
+    //---------------------------------------------------------------------------------
     
     // Main game loop
     while (!WindowShouldClose())                                        // Detect window close button or ESC key
@@ -130,6 +135,7 @@ int main(void){
                     if (enemy.isalive()){    
                         b.active = false;
                         enemy.kill();
+                        points++;
                         std::cout << "HIT!" << std::endl;
                         break;
                     }
@@ -146,6 +152,7 @@ int main(void){
             //----------------------------Setting Background-------------------------------
 
             ClearBackground(DARKGREEN);
+            ImageClearBackground(background_image.getimage(),WHITE);
 
             //-----------------------------------------------------------------------------
 
@@ -163,6 +170,11 @@ int main(void){
                 if (!bullets[i].active) continue;
                 DrawCircleV(bullets[i].pos, 4.0f, RED);  // Einfacher Kreis als Bullet
             }
+            //------------------------------------------------------------------------------
+
+            //-------------------------------Testing environment----------------------------
+            std::string mystring = "Points: " + std::to_string(points);
+            DrawText((mystring.c_str()), 0,0,20,BLACK); // ich bruch en Cstr da chann mich aber nöt errinere wie das gaht und han kei internet...
             //------------------------------------------------------------------------------
 
         EndDrawing();
